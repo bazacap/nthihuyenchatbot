@@ -3,22 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>Chatbot hướng dẫn nghiệp vụ VietinBank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        table { border-collapse: collapse; width: 100%; margin-top: 14px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 5px; text-align: left; font-size: 11px; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFF;
+            color: #222;
+            text-align: center;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        #clock {      	
+	    float: right;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            margin-right: 45px;
+            width: 40px;
+            text-align: left;
+	    line-height: 25px;
+        }
+        .date {        	
+	    float: left;
+            font-size: 13px;
+            margin-top: 10px;
+            color: #ABC;
+            background-color:  #fff;
+	        text-align: left;
+	        line-height: 25px;
+	        font-weight: bold;
+	        margin-right: 10px;
+        }
+        .container {
+            overflow: hidden;
+            justify-content: space-around; /* Canh giữa các phần tử */
+            align-items: left; /* Căn giữa theo chiều dọc */
+            gap: 10px; /* Khoảng cách giữa các div */
+	    font-size: 11px;
+	    }
     </style>
 </head>
+    
 <body>
 
-<h3>Chatbot hướng dẫn nghiệp vụ gửi tiết kiệm online</h3>
-
-<select id="service">
-    <option value="">-- Chọn nghiệp vụ --</option>
-    <option value="KHCN">Khách hàng Cá nhân (iPay)</option>
-    <option value="KHTC">Khách hàng Tổ chức (eFAST)</option>
-</select>
-<button onclick="showGuide()">Xem hướng dẫn</button>
-
+<div class="container"> 
+    <div class="date" id="date"></div>
+    <div id="clock">--:--:--</div>
+</div> 
+<div class="container"> 
+    <h3>Chatbot hướng dẫn nghiệp vụ gửi tiết kiệm online</h3>
+</div> 
+<div class="container">
+    <select id="service">
+        <option value="">-- Chọn nghiệp vụ --</option>
+        <option value="KHCN">Khách hàng Cá nhân (iPay)</option>
+        <option value="KHTC">Khách hàng Tổ chức (eFAST)</option>
+    </select>
+    <button onclick="showGuide()">Xem hướng dẫn</button>  
+</div>  
+    
 <div id="result"></div>
 
 <script>
@@ -61,6 +111,29 @@ function showGuide() {
         document.getElementById('result').innerHTML = html;
     }
 }
+
+    //Thời gian thực tại Sài Gòn
+        function updateTime() {
+            const now = new Date();
+            
+            // Chuyển đổi sang múi giờ Việt Nam (UTC+7)
+            const options = { timeZone: "Asia/Ho_Chi_Minh", hour12: false };
+            const timeString = now.toLocaleTimeString("vi-VN", options);
+            const dateString = now.toLocaleDateString("vi-VN", {
+                weekday: "long",
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+                timeZone: "Asia/Ho_Chi_Minh"
+            });
+
+            document.getElementById("clock").textContent = timeString;
+            document.getElementById("date").textContent = dateString;
+        }
+
+        // Cập nhật thời gian mỗi giây
+        setInterval(updateTime, 1000);
+        updateTime(); // Gọi ngay khi trang tải
 </script>
 
 </body>
