@@ -63,15 +63,15 @@
 <div class="container">
     <select id="service">
         <option value="">-- Chọn nghiệp vụ --</option>
-        <option value="1">Điều kiện STH NĐDPL</option>
-        <option value="2">NĐDPL là Người nước ngoài</option>
-        <option value="3">NĐDPL là Người Việt Nam</option>
-        <option value="4">Khi duyệt giao dịch có cần STH?</option>
-        <option value="5">KH không thấy Popup hoặc Thông báo STH</option>
-        <option value="6">NĐDPL đang ở nước ngoài, STH được khi</option>
-        <option value="7">Khi KH thay đổi thiết bị đăng nhập có cần soi mặt như cá nhân không?</option>
-        <option value="8">Đọc NFC</option>
-        <option value="9">Tài liệu liên quan STH KHTC</option>
+        <option value="1">1. Điều kiện STH NĐDPL</option>
+        <option value="2">2. NĐDPL là Người nước ngoài</option>
+        <option value="3">3. NĐDPL là Người Việt Nam</option>
+        <option value="4">4. Khi duyệt giao dịch có cần STH?</option>
+        <option value="5">5. KH không thấy Popup hoặc Thông báo STH</option>
+        <option value="6">6. NĐDPL đang ở nước ngoài, STH được khi</option>
+        <option value="7">7. KH đổi thiết bị đăng nhập - có cần soi mặt như cá nhân không?</option>
+        <option value="8">8. Đọc NFC</option>
+        <option value="9">9. Tài liệu liên quan STH KHTC</option>
     </select>
     <button onclick="showGuide()">Xem hướng dẫn</button>  
 </div>   <br>
@@ -96,6 +96,36 @@ const steps = {
         "Trong thời gian đầu: KH cần phải có CIF cá nhân để đăng ký STH",
         "Nếu đã có CIF cá nhân và đã đăng ký STH cá nhân thì đồng bộ sang eFAST là được",
         "Nếu đã có CIF cá nhân mà chưa đăng ký STH cá nhân thì KH ra quầy để STH cá nhân. Sau đó tiến hành đồng bộ sang eFAST."
+    ],
+    "3": [
+        "TH 1. Nếu đã có CIF cá nhân và đã đăng ký STH cá nhân thì đồng bộ sang eFAST là được. Nếu gặp lỗi trong quá trình đồng bộ thì:",
+        "   (i) STH lại bên iPay, sau đó làm lại là được. ",
+        "   (ii) Hoặc KH vào menu Thông tin người dùng (Avatar) chọn Đăng ký sinh trắc học, sau khi hệ thống hiển thị ảnh và popup thông báo Đồng bộ, KH ấn từ chối và thực hiện thu thập STH bằng cách chụp ảnh và quét NFC.",
+	"   (iiI) Nếu là lỗi PIN Soft OTP thì vào eFAST đặt lại PIN Soft OTP. Sau đó tiến hành đồng bộ lại.",
+	"TH 2. Nếu đã có CIF cá nhân mà chưa đăng ký STH cá nhân hoặc KHÔNG CÓ CIF thì KH thực hiện STH trên APP eFAST qua việc quét NFC CCCD và khuôn mặt."   
+    ],
+    "4": [
+        "Chỉ cần STH lần đầu. Trong từng giao dịch không cần STH."
+    ],
+    "5": [
+        "Người dùng eFAST vào mục avatar trên eFAST Mobile App và chọn mục Đăng kí sinh trắc học. Nếu không thấy thì:",
+        "   (i) Đối chiếu khớp đúng thông tin giữa BTS và Register. Lưu ý: Tick chọn "Yêu cầu STH" trên BTS. Nếu có duy trì thì đợi khoảng 10 phút mới thực hiện lại.",
+        "   (ii) KH phải dùng phiên bản ứng dụng eFAST tối thiểu từ: iOS 3.3.4 và Android là 3.3.5 trở lên."
+    ],
+    "6": [
+        "Điều kiện: NĐDPL đã có STH CIF cá nhân, đồng thời CIF cá nhân trên TPSS phải có email. Hệ thống gửi đồng thời OTP về số điện thoại di động và email cá nhân của khách hàng khi sử dụng dịch vụ khách hàng cá nhân tại VietinBank (email và điện thoại sử dụng VietinBank Ipay).",
+        "Nếu không STH được cho NĐDPL thì Công ty làm thủ tục Ủy quyền theo nội dung trong  BM01 cv 4277."
+    ],
+    "7": [
+        "KH không yêu cầu cần xác thực sinh trắc học khi thay đổi thiết bị đăng nhập. Theo quy định của pháp luật, KH chỉ cần thu thập & đối chiếu khớp đúng GTTT &STH một lần."
+    ],
+    "8": [
+        "Giai đoạn 1 dự án triển khai với luồng quét NFC, giai đoạn 2 sẽ triển khai với luồng định danh vneid như KHCN.",
+        "   (i) Nếu bị lỗi thiết bị thì dùng thiết bị khác để thực hiện.",
+        "   (ii) Nếu bị lỗi ngắt kết nối thì kiểm tra mạng internet hoặc đợi ít phút thử lại."
+    ],
+    "9": [
+        "Truy cập dữ liệu dùng chung bằng máy tính làm việc của mình."
     ]
 };
 
