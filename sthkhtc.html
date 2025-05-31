@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Sinh Trắc Học - KHTC</title>
+    <title>Chatbot hướng dẫn nghiệp vụ VietinBank</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -63,33 +63,39 @@
 <div class="container">
     <select id="service">
         <option value="">-- Chọn nghiệp vụ --</option>
-        <option value="KHCN">Khách hàng Cá nhân (iPay)</option>
-        <option value="KHTC">Khách hàng Tổ chức (eFAST)</option>
+        <option value="1">Điều kiện STH NĐDPL</option>
+        <option value="2">NĐDPL là Người nước ngoài</option>
+        <option value="3">NĐDPL là Người Việt Nam</option>
+        <option value="4">Khi duyệt giao dịch có cần STH?</option>
+        <option value="5">KH không thấy Popup hoặc Thông báo STH</option>
+        <option value="6">NĐDPL đang ở nước ngoài, STH được khi</option>
+        <option value="7">Khi KH thay đổi thiết bị đăng nhập có cần soi mặt như cá nhân không?</option>
+        <option value="8">Đọc NFC</option>
+        <option value="9">Tài liệu liên quan STH KHTC</option>
     </select>
     <button onclick="showGuide()">Xem hướng dẫn</button>  
 </div>   <br>
 <div class="container"> 
-    <a href="https://bazacap.github.io/nthihuyenchatbot/guitienonline.html">Click vào đây để đi đến Sinh Trắc Học - KHTC</a>
+    <a href="https://bazacap.github.io/nthihuyenchatbot/guitienonline.html">Click vào đây để xem nghiệp vụ gửi tiết kiệm online</a>
 </div>     
     
 <div id="result"></div>
 
 <script>
 const steps = {
-    "KHCN": [
-        "Lập tờ trình TOI ở hệ thống VCRM, trình Ban giám đốc(BGĐ) phê duyệt (nếu trong thẩm quyền Giám đốc Chi nhánh)/hoặc trình Trụ sở chính phê duyệt (nếu vượt thẩm quyền Giám đốc Chi Nhánh). Tối thiểu tờ trình phải ở trạng thái 7 trở lên mới chuyển sang bước 2.",
-        "Liên hệ Khách hàng thực hiện mở tài khoản tiết kiệm trên iPay. Sau khi Khách hàng mở xong tài khoản tiết kiệm trên iPay và đã nộp tiền thành công mới chuyển sang bước 3",
-        "Giao dịch viên (GDV) hoặc Cán bộ quan hệ khách hàng(RM) tạo bss để mở trần lãi suất, trong bss đính kèm email được hệ thống TOI gửi về (khi tờ trình ở trạng thái 7 hoặc 8), cung cấp đầy đủ thông tin Khách hàng (họ tên Khách hàng, CIF, số Tài khoản tiết kiệm áp dụng lãi suất ưu đãi Khách hàng vừa mở xong, mã sản phẩm, số tiền, lãi suất, kỳ hạn,…). Sau khi bss được xử lý và thông báo đã mở trần mới chuyển sang bước 4.",
-        "Giao dịch viên vào hệ thống TPSS, chọn chức năng duy trì lãi suất ngày quá khứ để duy trì lãi suất cho Khách hàng. ",
-        "Kiểm soát viên(KSV) phê duyệt giao dịch duy trì lãi suất của Giao dịch viên ở Bảng phê duyệt tại hệ thống TPSS.",
-        "GDV/RM/KSV kiểm tra lại tài khoản tiết kiệm của Khách hàng đã được cập nhật lãi suất đúng thỏa thuận chưa. Nếu đúng thì liên hệ báo Khách hàng kiểm tra trên iPay và hoàn tất. Nếu chưa đúng thì tìm nguyên nhân và xử lý (có thể nhờ bss hỗ trợ)."
+    "1": [
+        "Mỗi KHTC giao dịch tài chính trên eFAST phải có ít nhất 1 user cấp phê duyệt đăng ký STH",
+        "Có thể là NĐDPL hoặc Đại diện theo ủy quyền của NĐDPL. Nếu là NĐDPL theo ủy quyền, phải làm UQ toàn phần theo BM01 cv 4277.",
+        "Nếu là Người VN cần phải có CCCD gắn chip. Nếu là Người nước ngoài theo Mục 2 bên dưới.",
+        "Đối chiếu khớp đúng thông tin giữa BTS và Register. Lưu ý: Tick chọn "Yêu cầu STH" trên BTS. Nếu có duy trì thì đợi khoảng 10 phút mới thực hiện lại.",
+        "Để STH, KH phải dùng phiên bản ứng dụng eFAST tối thiểu từ: iOS 3.3.4 và Android là 3.3.5 trở lên.",
+        "Nếu gặp lỗi trong quá trình hỗ trợ KH và đã tham chiếu hết các nội dung bên dưới vẫn không xử lý được thì liên hệ GDV qua Zalo để phối hợp.",
+	"App Teller, dự kiến 15/6"
     ],
-    "KHTC": [
-        "Lập tờ trình TOI ở hệ thống VCRM, trình lên Ban giám đốc(BGĐ) phê duyệt (nếu trong thẩm quyền Giám đốc chi nhánh)/hoặc trình TSC phê duyệt (nếu vượt thẩm quyền Giám đốc Chi Nhánh). Tối thiểu tờ trình phải ở trạng thái 7 trở lên thì mới chuyển sang bước 2.",
-        "GDV/RM tạo bss để mở trần lãi suất, trong bss đính kèm email được hệ thống TOI gửi về (khi tờ trình ở trạng thái 7 hoặc 8), cung cấp đầy đủ thông tin KH (Tên Khách hàng, CIF, mã sản phẩm, số tiền, lãi suất, kỳ hạn,…). Sau khi bss được xử lý và thông báo đã mở trần mới chuyển sang bước 3.",
-        "GDV vào chức năng Register để duy trì lãi suất trần cho Khách hàng, chọn đúng mã sản phẩm đã thỏa thuận với Khách hàng. ",
-        "KSV phê duyệt giao dịch duy trì lãi suất của GDV ở Register. Sau đó chuyển sang Bước 5",
-        "Liên hệ Khách hàng thực hiện mở tài khoản có kỳ hạn trên eFAST theo đúng mã sản phẩm mà GDV đã duy trì. Sau khi Khách hàng mở tài khoản tiền gửi có kỳ hạn xong, GDV/RM kiểm tra lại trên hệ thống TPSS xem lãi suất đã đúng thỏa thuận hay chưa. Nếu đúng thì hoàn tất giao dịch. Nếu chưa đúng thì tìm nguyên nhân và xử lý (có thể nhờ bss hỗ trợ)."
+    "2": [
+        "Trong thời gian đầu: KH cần phải có CIF cá nhân để đăng ký STH",
+        "Nếu đã có CIF cá nhân và đã đăng ký STH cá nhân thì đồng bộ sang eFAST là được",
+        "Nếu đã có CIF cá nhân mà chưa đăng ký STH cá nhân thì KH ra quầy để STH cá nhân. Sau đó tiến hành đồng bộ sang eFAST."
     ]
 };
 
