@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot hướng dẫn nghiệp vụ VietinBank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 5px; text-align: left; font-size: 11px; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFF;
+            color: #222;
+            text-align: center;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        #clock {      	
+	    float: right;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            margin-right: 45px;
+            width: 40px;
+            text-align: left;
+	    line-height: 25px;
+        }
+        .date {        	
+	    float: left;
+            font-size: 13px;
+            margin-top: 10px;
+            color: #ABC;
+            background-color:  #fff;
+	        text-align: left;
+	        line-height: 25px;
+	        font-weight: bold;
+	        margin-right: 10px;
+        }
+        .container {
+            overflow: hidden;
+            justify-content: space-around; /* Canh giữa các phần tử */
+            align-items: left; /* Căn giữa theo chiều dọc */
+            gap: 10px; /* Khoảng cách giữa các div */
+	    font-size: 11px;
+	    }
+    </style>
+</head>
+    
+<body>
+
+<div class="container"> 
+    <div class="date" id="date"></div>
+    <div id="clock">--:--:--</div>
+</div> 
+<div class="container"> 
+    <h3>Chatbot hướng dẫn nghiệp vụ gửi tiết kiệm online</h3>
+</div> 
+<div class="container">
+    <select id="service">
+        <option value="">-- Chọn nghiệp vụ --</option>
+        <option value="KHCN">Khách hàng Cá nhân (iPay)</option>
+        <option value="KHTC">Khách hàng Tổ chức (eFAST)</option>
+    </select>
+    <button onclick="showGuide()">Xem hướng dẫn</button>  
+</div>  
+    
+<div id="result"></div>
+
+<script>
+const steps = {
+    "KHCN": [
+        "Lập tờ trình TOI ở hệ thống VCRM, trình Ban giám đốc(BGĐ) phê duyệt (nếu trong thẩm quyền Giám đốc Chi nhánh)/hoặc trình Trụ sở chính phê duyệt (nếu vượt thẩm quyền Giám đốc Chi Nhánh). Tối thiểu tờ trình phải ở trạng thái 7 trở lên mới chuyển sang bước 2.",
+        "Liên hệ Khách hàng thực hiện mở tài khoản tiết kiệm trên iPay. Sau khi Khách hàng mở xong tài khoản tiết kiệm trên iPay và đã nộp tiền thành công mới chuyển sang bước 3",
+        "Giao dịch viên (GDV) hoặc Cán bộ quan hệ khách hàng(RM) tạo bss để mở trần lãi suất, trong bss đính kèm email được hệ thống TOI gửi về (khi tờ trình ở trạng thái 7 hoặc 8), cung cấp đầy đủ thông tin Khách hàng (họ tên Khách hàng, CIF, số Tài khoản tiết kiệm áp dụng lãi suất ưu đãi Khách hàng vừa mở xong, mã sản phẩm, số tiền, lãi suất, kỳ hạn,…). Sau khi bss được xử lý và thông báo đã mở trần mới chuyển sang bước 4.",
+        "Giao dịch viên vào hệ thống TPSS, chọn chức năng duy trì lãi suất ngày quá khứ để duy trì lãi suất cho Khách hàng. ",
+        "Kiểm soát viên(KSV) phê duyệt giao dịch duy trì lãi suất của Giao dịch viên ở Bảng phê duyệt tại hệ thống TPSS.",
+        "GDV/RM/KSV kiểm tra lại tài khoản tiết kiệm của Khách hàng đã được cập nhật lãi suất đúng thỏa thuận chưa. Nếu đúng thì liên hệ báo Khách hàng kiểm tra trên iPay và hoàn tất. Nếu chưa đúng thì tìm nguyên nhân và xử lý (có thể nhờ bss hỗ trợ)."
+    ],
+    "KHTC": [
+        "Lập tờ trình TOI ở hệ thống VCRM, trình lên Ban giám đốc(BGĐ) phê duyệt (nếu trong thẩm quyền Giám đốc chi nhánh)/hoặc trình TSC phê duyệt (nếu vượt thẩm quyền Giám đốc Chi Nhánh). Tối thiểu tờ trình phải ở trạng thái 7 trở lên thì mới chuyển sang bước 2.",
+        "GDV/RM tạo bss để mở trần lãi suất, trong bss đính kèm email được hệ thống TOI gửi về (khi tờ trình ở trạng thái 7 hoặc 8), cung cấp đầy đủ thông tin KH (Tên Khách hàng, CIF, mã sản phẩm, số tiền, lãi suất, kỳ hạn,…). Sau khi bss được xử lý và thông báo đã mở trần mới chuyển sang bước 3.",
+        "GDV vào chức năng Register để duy trì lãi suất trần cho Khách hàng, chọn đúng mã sản phẩm đã thỏa thuận với Khách hàng. ",
+        "KSV phê duyệt giao dịch duy trì lãi suất của GDV ở Register. Sau đó chuyển sang Bước 5",
+        "Liên hệ Khách hàng thực hiện mở tài khoản có kỳ hạn trên eFAST theo đúng mã sản phẩm mà GDV đã duy trì. Sau khi Khách hàng mở tài khoản tiền gửi có kỳ hạn xong, GDV/RM kiểm tra lại trên hệ thống TPSS xem lãi suất đã đúng thỏa thuận hay chưa. Nếu đúng thì hoàn tất giao dịch. Nếu chưa đúng thì tìm nguyên nhân và xử lý (có thể nhờ bss hỗ trợ)."
+    ]
+};
+
+
+function showGuide() {
+    const selected = document.getElementById('service').value;
+    if (!selected) {
+        document.getElementById('result').innerHTML = "";
+        alert("Vui lòng chọn nghiệp vụ!");
+        return;
+    }
+    else {
+        let html = `<table><tr><th style="width:10%; text-align:center;">Các bước</th><th style="width:90%;">Mô tả chi tiết nghiệp vụ</th></tr>`;
+        steps[selected].forEach((desc, index) => {
+            html += `<tr>
+                        <td style="width:10%; text-align:center;">${index + 1}</td>
+                        <td >${desc}</td>
+                    </tr>`;
+        });
+        html += "</table>";
+    
+        document.getElementById('result').innerHTML = html;
+    }
+}
+
+    //Thời gian thực tại Sài Gòn
+        function updateTime() {
+            const now = new Date();
+            
+            // Chuyển đổi sang múi giờ Việt Nam (UTC+7)
+            const options = { timeZone: "Asia/Ho_Chi_Minh", hour12: false };
+            const timeString = now.toLocaleTimeString("vi-VN", options);
+            const dateString = now.toLocaleDateString("vi-VN", {
+                weekday: "long",
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+                timeZone: "Asia/Ho_Chi_Minh"
+            });
+
+            document.getElementById("clock").textContent = timeString;
+            document.getElementById("date").textContent = dateString;
+        }
+
+        // Cập nhật thời gian mỗi giây
+        setInterval(updateTime, 1000);
+        updateTime(); // Gọi ngay khi trang tải
+</script>
+
+</body>
+</html>
