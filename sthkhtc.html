@@ -84,25 +84,25 @@
 <script>
 const steps = {
     "1": [
-        "Mỗi KHTC giao dịch tài chính trên eFAST phải có ít nhất 1 user cấp phê duyệt đăng ký STH",
-        "Có thể là NĐDPL hoặc Đại diện theo ủy quyền của NĐDPL. Nếu là NĐDPL theo ủy quyền, phải làm UQ toàn phần theo BM01 cv 4277.",
-        "Nếu là Người VN cần phải có CCCD gắn chip. Nếu là Người nước ngoài theo Mục 2 bên dưới.",
-        "Đối chiếu khớp đúng thông tin giữa BTS và Register. Lưu ý: Tick chọn \"Yêu cầu STH\" trên BTS. Nếu có duy trì thì đợi khoảng 10 phút mới thực hiện lại.",
-        "Để STH, KH phải dùng phiên bản ứng dụng eFAST tối thiểu từ: iOS 3.3.4 và Android là 3.3.5 trở lên.",
-        "Nếu gặp lỗi trong quá trình hỗ trợ KH và đã tham chiếu hết các nội dung bên dưới vẫn không xử lý được thì liên hệ GDV qua Zalo để phối hợp.",
-	"App Teller, dự kiến 15/6"
+        "1. Mỗi KHTC giao dịch tài chính trên eFAST phải có ít nhất 1 user cấp phê duyệt đăng ký STH",
+        "2. Có thể là NĐDPL hoặc Đại diện theo ủy quyền của NĐDPL. Nếu là NĐDPL theo ủy quyền, phải làm UQ toàn phần theo BM01 cv 4277.",
+        "3. Nếu là Người VN cần phải có CCCD gắn chip. Nếu là Người nước ngoài theo Mục 2 bên dưới.",
+        "4. Đối chiếu khớp đúng thông tin giữa BTS và Register. Lưu ý: Tick chọn \"Yêu cầu STH\" trên BTS. Nếu có duy trì thì đợi khoảng 10 phút mới thực hiện lại.",
+        "5. Để STH, KH phải dùng phiên bản ứng dụng eFAST tối thiểu từ: iOS 3.3.4 và Android là 3.3.5 trở lên.",
+        "6.  Nếu gặp lỗi trong quá trình hỗ trợ KH và đã tham chiếu hết các nội dung bên dưới vẫn không xử lý được thì liên hệ GDV qua Zalo để phối hợp.",
+	"7. App Teller, dự kiến 15/6"
     ],
     "2": [
         "Trong thời gian đầu: KH cần phải có CIF cá nhân để đăng ký STH",
-        "   TH 1. Nếu đã có CIF cá nhân và đã đăng ký STH cá nhân thì đồng bộ sang eFAST là được",
-        "   TH 2. Nếu đã có CIF cá nhân mà chưa đăng ký STH cá nhân thì KH ra quầy để STH cá nhân. Sau đó tiến hành đồng bộ sang eFAST."
+        "   1. Nếu đã có CIF cá nhân và đã đăng ký STH cá nhân thì đồng bộ sang eFAST là được",
+        "   2. Nếu đã có CIF cá nhân mà chưa đăng ký STH cá nhân thì KH ra quầy để STH cá nhân. Sau đó tiến hành đồng bộ sang eFAST."
     ],
     "3": [
-        "TH 1. Nếu đã có CIF cá nhân và đã đăng ký STH cá nhân thì đồng bộ sang eFAST là được. Nếu gặp lỗi trong quá trình đồng bộ thì:",
+        "1. Nếu đã có CIF cá nhân và đã đăng ký STH cá nhân thì đồng bộ sang eFAST là được. Nếu gặp lỗi trong quá trình đồng bộ thì:",
         "   (i) STH lại bên iPay, sau đó làm lại là được. ",
         "   (ii) Hoặc KH vào menu Thông tin người dùng (Avatar) chọn Đăng ký sinh trắc học, sau khi hệ thống hiển thị ảnh và popup thông báo Đồng bộ, KH ấn từ chối và thực hiện thu thập STH bằng cách chụp ảnh và quét NFC.",
-	"   (iiI) Nếu là lỗi PIN Soft OTP thì vào eFAST đặt lại PIN Soft OTP. Sau đó tiến hành đồng bộ lại.",
-	"TH 2. Nếu đã có CIF cá nhân mà chưa đăng ký STH cá nhân hoặc KHÔNG CÓ CIF thì KH thực hiện STH trên APP eFAST qua việc quét NFC CCCD và khuôn mặt."   
+	"   (iii) Nếu là lỗi PIN Soft OTP thì vào eFAST đặt lại PIN Soft OTP. Sau đó tiến hành đồng bộ lại.",
+	"2. Nếu đã có CIF cá nhân mà chưa đăng ký STH cá nhân hoặc KHÔNG CÓ CIF thì KH thực hiện STH trên APP eFAST qua việc quét NFC CCCD và khuôn mặt."   
     ],
     "4": [
         "Chỉ cần STH lần đầu. Trong từng giao dịch không cần STH."
@@ -138,7 +138,7 @@ function showGuide() {
         return;
     }
     else {
-        let html = `<table><tr><th style="width:10%; text-align:center;">Các bước</th><th style="width:90%;">Mô tả chi tiết nghiệp vụ</th></tr>`;
+        let html = `<table><tr><th style="width:10%; text-align:center;">STT</th><th style="width:90%;">Mô tả chi tiết nghiệp vụ</th></tr>`;
         steps[selected].forEach((desc, index) => {
             html += `<tr>
                         <td style="width:10%; text-align:center;">${index + 1}</td>
